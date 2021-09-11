@@ -3,7 +3,7 @@ package weather
 import (
        "encoding/json"
        "fmt"
-       "io"
+       "io/ioutil"
        "log"
        "net/http"
 )
@@ -35,7 +35,7 @@ func httpGetStr(url string) string {
                log.Fatal("Get Http Error:", err)
        }
        // レスポンスボディを読み込む
-       body, err := io.ReadAll(response.Body)
+       body, err := ioutil.ReadAll(response.Body)
        if err != nil {
                log.Fatal("IO Read Error:", err)
        }
