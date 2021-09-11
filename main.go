@@ -19,17 +19,17 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	// 連絡をしたかどうかのリマインダーを送る
+	remind := linebot.NewTextMessage(os.Getenv("REMIND_MESSAGE"))
+	if _, err := bot.BroadcastMessage(remind).Do(); err != nil {
+		log.Fatal(err)
+	}
 	// weatherパッケージパッケージから天気情報の文字列を取得する
 	result := weather.GetWeather()
 	// テキストメッセージを生成する
 	message := linebot.NewTextMessage(result)
 	// テキストメッセージを友達登録しているユーザー全員に配信する
 	if _, err := bot.BroadcastMessage(message).Do(); err != nil {
-		log.Fatal(err)
-	}
-	// 連絡をしたかどうかのリマインダーを送る
-	remind := linebot.NewTextMessage(os.Getenv("REMIND_MESSAGE"))
-	if _, err := bot.BroadcastMessage(remind).Do(); err != nil {
 		log.Fatal(err)
 	}
 
