@@ -21,7 +21,7 @@ func main() {
     // weatherパッケージパッケージから天気情報の文字列を取得する
     result := weather.GetWeather()
     // テキストメッセージを生成する
-    message = linebot.NewTextMessage(result)
+    message := linebot.NewTextMessage(result)
     // テキストメッセージを友達登録しているユーザー全員に配信する
     if _, err := bot.BroadcastMessage(message).Do(); err != nil {
         log.Fatal(err)
