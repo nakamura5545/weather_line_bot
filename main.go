@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/line/line-bot-sdk-go/linebot"
+	"github.com/nakamura5545/weather_line_bot/eventhandler"
 	"github.com/nakamura5545/weather_line_bot/weather"
 )
 
@@ -27,10 +28,12 @@ func main() {
 	if _, err := bot.BroadcastMessage(message).Do(); err != nil {
 		log.Fatal(err)
 	}
-	// 連絡をしたかどうかのリマインダーを送る
-	remind := linebot.NewTextMessage(os.Getenv("REMIND_MESSAGE"))
-	if _, err := bot.BroadcastMessage(remind).Do(); err != nil {
-		log.Fatal(err)
+	// 連絡をしたかどうかのリマインダーを送る(水曜日に出力する)
+	if eventhandler.GetWeek() == 3 {
+		remind := linebot.NewTextMessage(os.Getenv("REMIND_MESSAGE"))
+		if _, err := bot.BroadcastMessage(remind).Do(); err != nil {
+			log.Fatal(err)
+		}
 	}
 
 }
