@@ -19,7 +19,7 @@ type Weather struct {
 func GetWeather() string {
 	jsonStr := httpGetStr("https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json")
 	weather := formatWeather(jsonStr)
-	area := fmt.Sprintf("%sの天気です。\n", weather.Area)
+	area := fmt.Sprintf("%sの天気です。", weather.Area)
 	body := fmt.Sprintf("%s\n", splitWeather(weather.Body))
 	result := area + body
 
